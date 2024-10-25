@@ -18,9 +18,9 @@ export default function App() {
   const [location, setLocation] = useState([
     {id: '1', image: require('./assets/images/photo1.png')},
     {id: '2', image: require('./assets/images/photo2.png')},
-    {id: '3', image: require('./assets/images/photo1.png')},
-    {id: '4', image: require('./assets/images/photo1.png')},
-    {id: '5', image: require('./assets/images/photo1.png')},
+    {id: '3', image: require('./assets/images/photo3.png')},
+    {id: '4', image: require('./assets/images/photo4.png')},
+    {id: '5', image: require('./assets/images/photo5.png')},
   ])
   
   return (
@@ -62,7 +62,7 @@ export default function App() {
       </View>
       
       <ScrollView style={{flex: 1, paddingHorizontal: 48, paddingVertical: 16}}>
-        <View>
+        <View style={{paddingTop: 16}}>
           <View style={{paddingBottom: 16, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
               <Text>Category</Text>
               <Image
@@ -91,7 +91,7 @@ export default function App() {
           />
           
         </View>
-        <View>
+        <View style={{paddingTop: 16}}>
           <View style={{paddingBottom: 16, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
               <Text>Popular Destination</Text>
               <Image
@@ -106,6 +106,31 @@ export default function App() {
               <View style={{alignItems: 'center',}}>
                   <Image
                     style={{width: 85, height: 85, borderRadius: 8}}
+                    source={item.image}
+                  />
+                  <Text>
+                      {item.name}
+                  </Text>
+              </View>
+            )}
+            numColumns={4} 
+            columnWrapperStyle={{justifyContent: 'space-between'}}
+            // contentContainerStyle={{paddingBottom: 16,}}
+
+          />
+          
+        </View>
+        <View style={{paddingTop: 16}}>
+          <View style={{paddingBottom: 16, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+              <Text>Recommended</Text>
+          </View>
+          <FlatList
+            data={location.filter(item => item.id > 3)}
+            keyExtractor={item => item.id}
+            renderItem={({item}) => (
+              <View style={{alignItems: 'center',}}>
+                  <Image
+                    style={{width: 120, height: 85, borderRadius: 8}}
                     source={item.image}
                   />
                   <Text>
