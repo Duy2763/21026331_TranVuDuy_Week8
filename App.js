@@ -16,11 +16,11 @@ export default function App() {
   
   ])
   const [location, setLocation] = useState([
-    {id: '1', image: 'photo1.png'},
-    {id: '2', image: 'photo2.png'},
-    {id: '3', image: 'photo3.png'},
-    {id: '4', image: 'photo4.png'},
-    {id: '5', image: 'photo5.png'},
+    {id: '1', image: require('./assets/images/photo1.png')},
+    {id: '2', image: require('./assets/images/photo2.png')},
+    {id: '3', image: require('./assets/images/photo1.png')},
+    {id: '4', image: require('./assets/images/photo1.png')},
+    {id: '5', image: require('./assets/images/photo1.png')},
   ])
   
   return (
@@ -61,7 +61,7 @@ export default function App() {
         </View>
       </View>
       
-      <ScrollView style={{flex: 1, paddingHorizontal: 32, paddingVertical: 16}}>
+      <ScrollView style={{flex: 1, paddingHorizontal: 48, paddingVertical: 16}}>
         <View>
           <View style={{paddingBottom: 16, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
               <Text>Category</Text>
@@ -86,6 +86,35 @@ export default function App() {
             )}
             numColumns={4} 
             columnWrapperStyle={{justifyContent: 'space-between', paddingBottom: 10}}
+            // contentContainerStyle={{paddingBottom: 16,}}
+
+          />
+          
+        </View>
+        <View>
+          <View style={{paddingBottom: 16, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+              <Text>Popular Destination</Text>
+              <Image
+                style={{width: 20, height: 20}}
+                source={require('./assets/images/3gach.png')}
+              />
+          </View>
+          <FlatList
+            data={location.filter(item => item.id < 4)}
+            keyExtractor={item => item.id}
+            renderItem={({item}) => (
+              <View style={{alignItems: 'center',}}>
+                  <Image
+                    style={{width: 85, height: 85, borderRadius: 8}}
+                    source={item.image}
+                  />
+                  <Text>
+                      {item.name}
+                  </Text>
+              </View>
+            )}
+            numColumns={4} 
+            columnWrapperStyle={{justifyContent: 'space-between'}}
             // contentContainerStyle={{paddingBottom: 16,}}
 
           />
