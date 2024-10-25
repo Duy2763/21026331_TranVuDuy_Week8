@@ -1,28 +1,53 @@
+import axios from 'axios';
 import { StatusBar } from 'expo-status-bar';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FlatList, Image, TextInput, SafeAreaView, StyleSheet, Text, View } from 'react-native';
-import { ScrollView } from 'react-native-web';
+import { ScrollView } from 'react-native';
 
 export default function App() {
   const [category, setCategory] = useState([
-    {id: '1', name: 'Resort', image: require('./assets/images/resort.png')},
-    {id: '2', name: 'Homestay', image: require('./assets/images/homestay.png')},
-    {id: '3', name: 'Hotel', image: require('./assets/images/hotel.png')},
-    {id: '4', name: 'Lodge', image: require('./assets/images/lodge.png')},
-    {id: '5', name: 'Villa', image: require('./assets/images/hostel.png')},
-    {id: '6', name: 'Apartment', image: require('./assets/images/apartment.png')},
-    {id: '7', name: 'Hostel', image: require('./assets/images/hostel.png')},
-    {id: '8', name: 'See all', image: require('./assets/images/seeall.png')},
+    // {id: '1', name: 'Resort', image: require('./assets/images/resort.png')},
+    // {id: '2', name: 'Homestay', image: require('./assets/images/homestay.png')},
+    // {id: '3', name: 'Hotel', image: require('./assets/images/hotel.png')},
+    // {id: '4', name: 'Lodge', image: require('./assets/images/lodge.png')},
+    // {id: '5', name: 'Villa', image: require('./assets/images/hostel.png')},
+    // {id: '6', name: 'Apartment', image: require('./assets/images/apartment.png')},
+    // {id: '7', name: 'Hostel', image: require('./assets/images/hostel.png')},
+    // {id: '8', name: 'See all', image: require('./assets/images/seeall.png')},
   
   ])
   const [location, setLocation] = useState([
-    {id: '1', image: require('./assets/images/photo1.png')},
-    {id: '2', image: require('./assets/images/photo2.png')},
-    {id: '3', image: require('./assets/images/photo3.png')},
-    {id: '4', image: require('./assets/images/photo4.png')},
-    {id: '5', image: require('./assets/images/photo5.png')},
+    // {id: '1', image: require('./assets/images/photo1.png')},
+    // {id: '2', image: require('./assets/images/photo2.png')},
+    // {id: '3', image: require('./assets/images/photo3.png')},
+    // {id: '4', image: require('./assets/images/photo4.png')},
+    // {id: '5', image: require('./assets/images/photo5.png')},
   ])
-  
+
+  const fetchLocation = async () => {
+    try {
+      const response = await axios.get('https://671b8cba2c842d92c3806828.mockapi.io/api/v1/locations');
+      setLocation(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const fetchCategory = async () => {
+    try {
+      const response = await axios.get('https://671b8cba2c842d92c3806828.mockapi.io/api/v1/categories');
+      setCategory(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  useEffect(() => {
+    fetchCategory();
+    fetchLocation();
+
+
+  }, [])
+
   return (
     <SafeAreaView style={{flex: 1}}>
       <View style={{backgroundColor: 'rgb(121, 120, 193)', padding: 24, gap: 24}}> 
@@ -77,7 +102,7 @@ export default function App() {
               <View style={{alignItems: 'center',}}>
                   <Image
                     style={{width: 60, height: 60}}
-                    source={item.image}
+                    source={{ uri: item.image }}
                   />
                   <Text>
                       {item.name}
@@ -106,7 +131,7 @@ export default function App() {
               <View style={{alignItems: 'center',}}>
                   <Image
                     style={{width: 85, height: 85, borderRadius: 8}}
-                    source={item.image}
+                    source={{ uri: item.image }}
                   />
                   <Text>
                       {item.name}
@@ -131,7 +156,7 @@ export default function App() {
               <View style={{alignItems: 'center',}}>
                   <Image
                     style={{width: 120, height: 85, borderRadius: 8}}
-                    source={item.image}
+                    source={{ uri: item.image }}
                   />
                   <Text>
                       {item.name}
