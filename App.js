@@ -1,18 +1,18 @@
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
-import { Image, TextInput } from 'react-native';
-import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { FlatList, Image, TextInput, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { ScrollView } from 'react-native-web';
 
 export default function App() {
   const [category, setCategory] = useState([
-    {id: '1', name: 'Resort', image: 'resort.png'},
-    {id: '2', name: 'Homestay', image: 'homestay.png'},
-    {id: '3', name: 'Hotel', image: 'hotel.png'},
-    {id: '4', name: 'Lodge', image: 'lodge.png'},
-    {id: '5', name: 'Villa', image: 'hostel.png'},
-    {id: '6', name: 'Apartment', image: 'apartment.png'},
-    {id: '7', name: 'Hostel', image: 'hostel.png'},
-    {id: '8', name: 'See all', image: 'seeall.png'},
+    {id: '1', name: 'Resort', image: require('./assets/images/resort.png')},
+    {id: '2', name: 'Homestay', image: require('./assets/images/homestay.png')},
+    {id: '3', name: 'Hotel', image: require('./assets/images/hotel.png')},
+    {id: '4', name: 'Lodge', image: require('./assets/images/lodge.png')},
+    {id: '5', name: 'Villa', image: require('./assets/images/hostel.png')},
+    {id: '6', name: 'Apartment', image: require('./assets/images/apartment.png')},
+    {id: '7', name: 'Hostel', image: require('./assets/images/hostel.png')},
+    {id: '8', name: 'See all', image: require('./assets/images/seeall.png')},
   
   ])
   const [location, setLocation] = useState([
@@ -60,7 +60,39 @@ export default function App() {
             />
         </View>
       </View>
-      //
+      
+      <ScrollView style={{flex: 1, paddingHorizontal: 32, paddingVertical: 16}}>
+        <View>
+          <View style={{paddingBottom: 16, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+              <Text>Category</Text>
+              <Image
+                style={{width: 20, height: 20}}
+                source={require('./assets/images/3gach.png')}
+              />
+          </View>
+          <FlatList
+            data={category}
+            keyExtractor={item => item.id}
+            renderItem={({item}) => (
+              <View style={{alignItems: 'center',}}>
+                  <Image
+                    style={{width: 60, height: 60}}
+                    source={item.image}
+                  />
+                  <Text>
+                      {item.name}
+                  </Text>
+              </View>
+            )}
+            numColumns={4} 
+            columnWrapperStyle={{justifyContent: 'space-between', paddingBottom: 10}}
+            // contentContainerStyle={{paddingBottom: 16,}}
+
+          />
+          
+        </View>
+      </ScrollView>
+
       <View style={{backgroundColor: 'rgb(121, 120, 193)', flexDirection: 'row', justifyContent: 'space-evenly', paddingTop: 16, paddingBottom: 24}}> 
         <View>
           <Image
