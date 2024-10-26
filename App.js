@@ -87,7 +87,7 @@ export default function App() {
       </View>
       
       <ScrollView style={{flex: 1, paddingHorizontal: 48, paddingVertical: 16}}>
-        <View style={{paddingTop: 16}}>
+        <View style={{}}>
           <View style={{paddingBottom: 16, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
               <Text>Category</Text>
               <Image
@@ -155,7 +155,7 @@ export default function App() {
             renderItem={({item}) => (
               <View style={{alignItems: 'center',}}>
                   <Image
-                    style={{width: 120, height: 85, borderRadius: 8}}
+                    style={{width: 140, height: 85, borderRadius: 8}}
                     source={{ uri: item.image }}
                   />
                   <Text>
